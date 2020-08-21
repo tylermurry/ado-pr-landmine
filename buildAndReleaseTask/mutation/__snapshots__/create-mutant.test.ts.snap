@@ -1,0 +1,160 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create mutant should replace something on a single line 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "__mock__/insertion-sort.js",
+      "const insertionSort = (inputArr) => {
+    let length = inputArr.length;
+    for (let i = 1; i < length; i++) {
+        let key = inputArr[i];
+        let j = i;
+        while (j >= 0 && inputArr[j] > key) {
+            inputArr[j + 1] = inputArr[j];
+            j = j - 1;
+        }
+        inputArr[j + 1] = key;
+    }
+    return inputArr;
+};
+
+module.exports = insertionSort",
+      "utf8",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`create mutant should replace something that spans multiple lines in the middle 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "__mock__/insertion-sort.js",
+      "const insertionSort = (inputArr) => {
+    let length = inputArr.length;
+    for (let i = 1; i < length; i++) {
+        let key = inputArr[i];
+        let j = i - 1;
+        while (j >= 0 && inputArr[j] > key) {
+            inputabc - 1;
+        }
+        inputArr[j + 1] = key;
+    }
+    return inputArr;
+};
+
+module.exports = insertionSort",
+      "utf8",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`create mutant should replace something that spans multiple lines with a single line 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "__mock__/insertion-sort.js",
+      "const insertionSort = (inputArr) => {
+    let length = inputArr.length;
+    for (let i = 1; i < length; i++) {
+        let key = inputArr[i];
+        let j = i - 1;
+        while (j >= 0 && inputArr[j] > key) {
+            console.log('dummy');
+        }
+        inputArr[j + 1] = key;
+    }
+    return inputArr;
+};
+
+module.exports = insertionSort",
+      "utf8",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`create mutant should replace something that spans multiple lines with a the same number of lines 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "__mock__/insertion-sort.js",
+      "const insertionSort = (inputArr) => {
+    let length = inputArr.length;
+    for (let i = 1; i < length; i++) {
+        let key = inputArr[i];
+        let j = i - 1;
+        while (j >= 0 && inputArr[j] > key) {
+            const abc = 'xyz';
+            console.log(abc);
+        }
+        inputArr[j + 1] = key;
+    }
+    return inputArr;
+};
+
+module.exports = insertionSort",
+      "utf8",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`create mutant should replace something that spans multiple lines with even more lines 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "__mock__/insertion-sort.js",
+      "const insertionSort = (inputArr) => {
+    let length = inputArr.length;
+    for (let i = 1; i < length; i++) {
+        let key = inputArr[i];
+        let j = i - 1;
+        while (j >= 0 && inputArr[j] > key) {
+            const abc = 'xyz';
+            console.log(abc);
+            console.log('xyz');
+        }
+        inputArr[j + 1] = key;
+    }
+    return inputArr;
+};
+
+module.exports = insertionSort",
+      "utf8",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
