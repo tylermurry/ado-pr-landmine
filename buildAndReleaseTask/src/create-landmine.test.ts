@@ -1,10 +1,10 @@
 import fs from 'fs';
-import createMutant from './create-mutant';
+import createMutant from './create-landmine';
 
 jest.mock('fs');
 
 describe('create mutant', () => {
-    const filePath =  '__mock__/insertion-sort.js';
+    const filePath =  'src/__mock__/insertion-sort.js';
     beforeEach(() => {
         jest.clearAllMocks();
         console.log = jest.fn();

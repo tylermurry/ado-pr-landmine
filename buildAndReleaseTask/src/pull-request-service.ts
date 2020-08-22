@@ -15,6 +15,7 @@ export default class PullRequestService {
     }
 
     public async getActiveThreads(repoName: string, pullRequestId: number): Promise<GitPullRequestCommentThread[]> {
+        console.log(`Getting active threads for ${pullRequestId}...`);
         const gitApi = await this.connection.getGitApi();
         const threads: GitPullRequestCommentThread[] = await gitApi.getThreads(repoName, pullRequestId, this.project);
 
@@ -23,7 +24,10 @@ export default class PullRequestService {
             : [];
     }
 
-    public async addCommentToThread(repoName: string, pullRequestId: number, comment: string): Promise<void> {
-        // TODO This
+    public async addCommentToThread(repoName: string, pullRequestId: number, threadId: number, comment: string): Promise<void> {
+        console.log(`Adding comment to thread (${threadId}): ${comment}...`);
+
+        const gitApi = await this.connection.getGitApi();
+        await gitApi.createComment({ content: comment }, repoName, pullRequestId, threadId, this.project);
     }
 }

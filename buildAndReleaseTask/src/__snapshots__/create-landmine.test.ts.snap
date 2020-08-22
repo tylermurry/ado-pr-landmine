@@ -4,7 +4,7 @@ exports[`create mutant should replace something on a single line 1`] = `
 [MockFunction] {
   "calls": Array [
     Array [
-      "__mock__/insertion-sort.js",
+      "src/__mock__/insertion-sort.js",
       "const insertionSort = (inputArr) => {
     let length = inputArr.length;
     for (let i = 1; i < length; i++) {
@@ -36,7 +36,7 @@ exports[`create mutant should replace something that spans multiple lines in the
 [MockFunction] {
   "calls": Array [
     Array [
-      "__mock__/insertion-sort.js",
+      "src/__mock__/insertion-sort.js",
       "const insertionSort = (inputArr) => {
     let length = inputArr.length;
     for (let i = 1; i < length; i++) {
@@ -67,7 +67,7 @@ exports[`create mutant should replace something that spans multiple lines with a
 [MockFunction] {
   "calls": Array [
     Array [
-      "__mock__/insertion-sort.js",
+      "src/__mock__/insertion-sort.js",
       "const insertionSort = (inputArr) => {
     let length = inputArr.length;
     for (let i = 1; i < length; i++) {
@@ -98,7 +98,7 @@ exports[`create mutant should replace something that spans multiple lines with a
 [MockFunction] {
   "calls": Array [
     Array [
-      "__mock__/insertion-sort.js",
+      "src/__mock__/insertion-sort.js",
       "const insertionSort = (inputArr) => {
     let length = inputArr.length;
     for (let i = 1; i < length; i++) {
@@ -130,7 +130,7 @@ exports[`create mutant should replace something that spans multiple lines with e
 [MockFunction] {
   "calls": Array [
     Array [
-      "__mock__/insertion-sort.js",
+      "src/__mock__/insertion-sort.js",
       "const insertionSort = (inputArr) => {
     let length = inputArr.length;
     for (let i = 1; i < length; i++) {

@@ -1,0 +1,70 @@
+import tl = require('azure-pipelines-task-lib/task');
+import PullRequestService from './pull-request-service';
+import {GitPullRequestCommentThread} from "azure-devops-node-api/interfaces/GitInterfaces";
+import runMinesweeper from './run-minesweeper';
+
+const outInvalidThreads = (thread: GitPullRequestCommentThread): boolean => {
+    if (!thread.comments) return false;
+
+    // Ensure the comment is a "bomb"
+    const topComment: string = thread.comments[0].content || '';
+    if (!(topComment.includes('/bomb') || topComment.includes('💣'))) return false;
+
+    // Ensure the top comment includes a code suggestion
+    if (!topComment.includes('```suggestion')) return false;
+
+    // Ensure the thread is marked as "passed"
+    if (thread.comments.find(comment => comment.content?.includes('✅'))) return false;
+
+    return true;
+}
+
+export default async () => {
+    try {
+        const accessToken = tl.getInput('accessToken', true);
+        const orgURL = tl.getInput('orgUrl', true);
+        const testCommand = tl.getInput('testCommand', true);
+        const testCommandDirectory = tl.getInput('testCommandDirectory', false) || '.';
+        const testCommandTimeout = parseInt(tl.getInput('testCommandTimeout', false) || '60000');
+
+        if (!accessToken) throw Error('accessToken must be provided');
+        if (!orgURL) throw Error('orgUrl must be provided');
+        if (!testCommand) throw Error('testCommand must be provided');
+        if (!process.env.SYSTEM_TEAMPROJECT) throw Error('System.TeamProject must be provided');
+        if (!process.env.SYSTEM_PULLREQUEST_SOURCEBRANCH) throw Error('System.PullRequest.SourceBranch must be provided');
+        if (!process.env.SYSTEM_PULLREQUEST_PULLREQUESTNUMBER) throw Error('System.PullRequest.PullRequestNumber must be provided');
+
+        const project = process.env.SYSTEM_TEAMPROJECT;
+        const repo = process.env.SYSTEM_PULLREQUEST_SOURCEBRANCH;
+        const pullRequestId = parseInt(process.env.SYSTEM_PULLREQUEST_PULLREQUESTNUMBER);
+
+        const pullRequestService = new PullRequestService(accessToken, project, orgURL);
+        const threads = await pullRequestService.getActiveThreads(repo, pullRequestId);
+        const validThreads = threads.filter(outInvalidThreads);
+        let atLeastOneFailure = false;
+
+        for (const thread of validThreads) {
+            console.log(thread);
+            if (!thread.id) throw Error('Invalid thread id');
+
+            const bombDefused = await runMinesweeper(testCommand, testCommandDirectory, testCommandTimeout, thread);
+
+            if (bombDefused) {
+                await pullRequestService.addCommentToThread(repo, pullRequestId, thread.id, '✅ Successfully defused bomb');
+            } else {
+                atLeastOneFailure = true;
+                await pullRequestService.addCommentToThread(repo, pullRequestId, thread.id, '💥 Bomb not defused. Please adjust your test to catch the error');
+            }
+        }
+
+        if (atLeastOneFailure) {
+            throw Error('There was at least bomb that was not defused.')
+        }
+
+        tl.setResult(tl.TaskResult.Succeeded, 'All bombs successfully defused');
+    }
+    catch (err) {
+        console.log(err);
+        tl.setResult(tl.TaskResult.Failed, err.message);
+    }
+}

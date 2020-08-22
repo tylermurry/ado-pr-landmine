@@ -8,7 +8,6 @@ const extractCodeBlock = (fileContents: string, beginLine: number, beginOffset: 
 
     for (let lineNumber = beginLine; lineNumber <= endLine; lineNumber++) {
         if (lineNumber === beginLine && lineNumber === endLine) {
-            console.log(lines[lineNumber].slice(beginOffset, endOffset));
             codeBlock = lines[lineNumber].slice(beginOffset, endOffset);
         } else if (lineNumber === beginLine) {
             codeBlock = `${codeBlock}${lines[lineNumber].substr(beginOffset)}\n`;
@@ -23,6 +22,8 @@ const extractCodeBlock = (fileContents: string, beginLine: number, beginOffset: 
 }
 
 export default (filePath: string = '', beginLine: number, beginOffset: number, endLine: number, endOffset: number, newCodeBlock: string): void => {
+    console.log(`Adding landmine to ${filePath} at ${beginLine}:${beginOffset} to ${endLine}:${endOffset} with '${newCodeBlock}'`);
+
     const fileContents = fs.readFileSync(filePath || '', 'utf8');
     const beginLinePrefix = fileContents.split('\n')[beginLine - 1].slice(0, beginOffset - 1);
     const endLineSuffix = fileContents.split('\n')[endLine - 1].slice(endOffset - 1);
