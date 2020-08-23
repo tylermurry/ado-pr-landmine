@@ -16,27 +16,23 @@ const executeOrTimeout = async (command: string, directory: string, timeout: num
         process.kill('SIGINT');
         reject('Test command timed out');
     }, timeout);
+
+    process.stdout.on('data', console.log);
+    process.stderr.on('data', console.log);
+
     process.on('exit', (code: number, signal: string) => {
-        const result = {code, signal, stdout: process.stdout, stderr: process.stderr};
         clearTimeout(processTimeout);
-        if (code !== 0) reject(result)
-        resolve(result);
+        if (code !== 0) reject({ code, signal })
+        resolve({ code, signal });
     });
 });
 
 const executeTestCommand = async (testCommand: string, testCommandDirectory: string, testCommandTimeout: number): Promise<any> => {
     try {
         console.log('Sweeping for mines...');
-
-        const { stdout, stderr } = await executeOrTimeout(testCommand, testCommandDirectory, testCommandTimeout);
-
-        if (stdout) console.log(stdout.toString());
-        if (stderr) console.log(stderr.toString());
-
+        await executeOrTimeout(testCommand, testCommandDirectory, testCommandTimeout);
         return false;
     } catch (e) {
-        console.log(e);
-
         // Timeouts are not a valid bomb-defusal failure
         if (e === 'Test command timed out') {
             console.log(`Test command failed because it exceeded timeout of ${testCommandTimeout}ms`);
@@ -55,17 +51,19 @@ export default async (testCommand: string, testCommandDirectory: string, testCom
 
     if (!filePath || !rightFileStart?.line || !rightFileStart?.offset || !rightFileEnd?.line || !rightFileEnd?.offset) throw Error('Invalid thread data.');
 
+    const fullFilePath = `${testCommandDirectory}${filePath}`
+
     console.log('Creating backup file...');
-    fs.copyFileSync(filePath || '', `${filePath}.backup`);
+    fs.copyFileSync(fullFilePath, `${fullFilePath}.backup`);
 
     console.log('Creating landmine...');
-    createLandmine(filePath, rightFileStart.line, rightFileStart?.offset, rightFileEnd?.line, rightFileEnd?.offset, extractedCodeSuggestion);
+    createLandmine(fullFilePath, rightFileStart.line, rightFileStart?.offset, rightFileEnd?.line, rightFileEnd?.offset, extractedCodeSuggestion);
 
     const bombDefused = await executeTestCommand(testCommand, testCommandDirectory, testCommandTimeout);
 
     console.log('Restoring backup file...');
-    fs.copyFileSync(`${filePath}.backup`, filePath || '');
-    fs.unlinkSync(`${filePath}.backup`);
+    fs.copyFileSync(`${fullFilePath}.backup`, fullFilePath);
+    fs.unlinkSync(`${fullFilePath}.backup`);
 
     return bombDefused;
 }

@@ -8,19 +8,44 @@
   "category": "Utility",
   "author": "Tyler Murry & Zach O'Hearn",
   "version": {
-    "Major": 0,
-    "Minor": 1,
-    "Patch": 0
+    "Major": 3,
+    "Minor": 0,
+    "Patch": 6
   },
-  "instanceNameFormat": "Echo $(samplestring)",
+  "instanceNameFormat": "Sweeping for Landmines",
   "inputs": [
     {
-      "name": "samplestring",
+      "name": "accessToken",
       "type": "string",
-      "label": "Sample String",
-      "defaultValue": "",
-      "required": true,
-      "helpMarkDown": "A sample string"
+      "label": "Personal Access Token to retrieve and update comments on the pull request",
+      "defaultValue": "$(System.AccessToken)",
+      "required": true
+    },
+    {
+      "name": "orgUrl",
+      "type": "string",
+      "label": "URL of the azure devops organization (e.g. https://dev.azure.com/my-org)",
+      "required": true
+    },
+    {
+      "name": "testCommand",
+      "type": "string",
+      "label": "Command that is run after each bomb is created. This command should be comprehensive enough to catch and defuse the bomb.",
+      "required": true
+    },
+    {
+      "name": "testCommandDirectory",
+      "type": "string",
+      "label": "The working directory where test command is executed.",
+      "required": false,
+      "defaultValue": "$(System.DefaultWorkingDirectory)"
+    },
+    {
+      "name": "testCommandTimeout",
+      "type": "string",
+      "label": "The number of milliseconds to wait before bailing on the test command. Needs to be sufficiently high to run the test suite but low enough to catch infinite loops or runaway threads created by the mutation.",
+      "required": false,
+      "defaultValue": "60000"
     }
   ],
   "execution": {

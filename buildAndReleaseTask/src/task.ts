@@ -14,7 +14,7 @@ const outInvalidThreads = (thread: GitPullRequestCommentThread): boolean => {
     if (!topComment.includes('```suggestion')) return false;
 
     // Ensure the thread is marked as "passed"
-    if (thread.comments.find(comment => comment.content?.includes('✅'))) return false;
+    if (thread.comments.find(comment => !comment.isDeleted && comment.content?.includes('✅'))) return false;
 
     return true;
 }
@@ -31,16 +31,21 @@ export default async () => {
         if (!orgURL) throw Error('orgUrl must be provided');
         if (!testCommand) throw Error('testCommand must be provided');
         if (!process.env.SYSTEM_TEAMPROJECT) throw Error('System.TeamProject must be provided');
-        if (!process.env.SYSTEM_PULLREQUEST_SOURCEBRANCH) throw Error('System.PullRequest.SourceBranch must be provided');
-        if (!process.env.SYSTEM_PULLREQUEST_PULLREQUESTNUMBER) throw Error('System.PullRequest.PullRequestNumber must be provided');
+        if (!process.env.BUILD_REPOSITORY_NAME) throw Error('Build.Repository.Name must be provided');
+        if (!process.env.SYSTEM_PULLREQUEST_PULLREQUESTID) throw Error('System.PullRequest.PullRequestId must be provided');
 
         const project = process.env.SYSTEM_TEAMPROJECT;
-        const repo = process.env.SYSTEM_PULLREQUEST_SOURCEBRANCH;
-        const pullRequestId = parseInt(process.env.SYSTEM_PULLREQUEST_PULLREQUESTNUMBER);
+        const repo = process.env.BUILD_REPOSITORY_NAME;
+        const pullRequestId = parseInt(process.env.SYSTEM_PULLREQUEST_PULLREQUESTID);
 
         const pullRequestService = new PullRequestService(accessToken, project, orgURL);
+
         const threads = await pullRequestService.getActiveThreads(repo, pullRequestId);
+        tl.debug(`All threads: ${JSON.stringify(threads, null, 2)}`);
+
         const validThreads = threads.filter(outInvalidThreads);
+        tl.debug(`Valid threads: ${JSON.stringify(validThreads, null, 2)}`);
+
         let atLeastOneFailure = false;
 
         for (const thread of validThreads) {

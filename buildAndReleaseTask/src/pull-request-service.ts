@@ -15,7 +15,7 @@ export default class PullRequestService {
     }
 
     public async getActiveThreads(repoName: string, pullRequestId: number): Promise<GitPullRequestCommentThread[]> {
-        console.log(`Getting active threads for ${pullRequestId}...`);
+        console.log(`Getting active threads for ${repoName}/${pullRequestId}...`);
         const gitApi = await this.connection.getGitApi();
         const threads: GitPullRequestCommentThread[] = await gitApi.getThreads(repoName, pullRequestId, this.project);
 

@@ -25,8 +25,8 @@ describe('Integration Test', () => {
         (tl.getInput as any).mockReturnValueOnce('./src/__mock__');
         (tl.getInput as any).mockReturnValueOnce('5000');
         process.env.SYSTEM_TEAMPROJECT = 'team-project';
-        process.env.SYSTEM_PULLREQUEST_SOURCEBRANCH = 'some-repo';
-        process.env.SYSTEM_PULLREQUEST_PULLREQUESTNUMBER = '123456';
+        process.env.BUILD_REPOSITORY_NAME = 'some-repo';
+        process.env.SYSTEM_PULLREQUEST_PULLREQUESTID = '123456';
     })
 
     it('should add two landmines and catch them all', async () => {
@@ -37,7 +37,7 @@ describe('Integration Test', () => {
                 { content: "/bomb\n\n```suggestion\n2\n```" },
             ],
             threadContext: {
-                filePath: './src/__mock__/insertion-sort.js',
+                filePath: '/insertion-sort.js',
                 rightFileStart: {line: 3, offset: 18},
                 rightFileEnd: {line: 3, offset: 19},
             }
@@ -49,7 +49,7 @@ describe('Integration Test', () => {
                 { content: "💥 Bomb not defused. Verify your tests can catch this issue." },
             ],
             threadContext: {
-                filePath: './src/__mock__/insertion-sort.js',
+                filePath: '/insertion-sort.js',
                 rightFileStart: {line: 3, offset: 18},
                 rightFileEnd: {line: 3, offset: 19},
             }
@@ -69,7 +69,7 @@ describe('Integration Test', () => {
                 { content: "/bomb\n\n```suggestion\n; console.log('here')\n```" },
             ],
             threadContext: {
-                filePath: './src/__mock__/insertion-sort.js',
+                filePath: '/insertion-sort.js',
                 rightFileStart: {line: 2, offset: 33},
                 rightFileEnd: {line: 2, offset: 34},
             }
@@ -89,7 +89,7 @@ describe('Integration Test', () => {
                 { content: "💣\n\n```suggestion\nconsole.log('infinite loop!');\n```" },
             ],
             threadContext: {
-                filePath: './src/__mock__/insertion-sort.js',
+                filePath: '/insertion-sort.js',
                 rightFileStart: {line: 7, offset: 13},
                 rightFileEnd: {line: 8, offset: 23},
             }
@@ -119,7 +119,7 @@ describe('Integration Test', () => {
                 { content: "✅ Bomb successfully defused" },
             ],
             threadContext: {
-                filePath: './src/__mock__/insertion-sort.js',
+                filePath: '/insertion-sort.js',
                 rightFileStart: {line: 3, offset: 18},
                 rightFileEnd: {line: 3, offset: 19},
             }
@@ -130,7 +130,7 @@ describe('Integration Test', () => {
                 { content: "💣\n\n```suggestion\n3\n```" },
             ],
             threadContext: {
-                filePath: './src/__mock__/insertion-sort.js',
+                filePath: '/insertion-sort.js',
                 rightFileStart: {line: 3, offset: 18},
                 rightFileEnd: {line: 3, offset: 19},
             }
