@@ -60,7 +60,7 @@ export default async () => {
                 await pullRequestService.addCommentToThread(repo, pullRequestId, thread.id, '✅ Successfully defused bomb', autoResolve);
             } else {
                 atLeastOneFailure = true;
-                await pullRequestService.addCommentToThread(repo, pullRequestId, thread.id, '💥 Bomb not defused. Please adjust your test to catch the error', autoResolve);
+                await pullRequestService.addCommentToThread(repo, pullRequestId, thread.id, '💥 Bomb not defused. Please adjust your test to catch the error', false);
             }
         }
 
