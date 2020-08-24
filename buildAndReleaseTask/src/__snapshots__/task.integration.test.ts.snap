@@ -1,0 +1,252 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Integration Test should add a landmine but not catch it 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      2,
+      "There was at least bomb that was not defused.",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Integration Test should add a landmine but not catch it 2`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "content": "💥 Bomb not defused. Please adjust your test to catch the error",
+      },
+      "some-repo",
+      123456,
+      1,
+      "team-project",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Integration Test should add a landmine but not catch it 3`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "status": 2,
+      },
+      "some-repo",
+      123456,
+      1,
+      "team-project",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Integration Test should add a landmine but not catch it because the execution timed out 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      2,
+      "There was at least bomb that was not defused.",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Integration Test should add a landmine but not catch it because the execution timed out 2`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "content": "💥 Bomb not defused. Please adjust your test to catch the error",
+      },
+      "some-repo",
+      123456,
+      1,
+      "team-project",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Integration Test should add a landmine but not catch it because the execution timed out 3`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "status": 2,
+      },
+      "some-repo",
+      123456,
+      1,
+      "team-project",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Integration Test should add two landmines and catch them all 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      0,
+      "All bombs successfully defused",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Integration Test should add two landmines and catch them all 2`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "content": "✅ Successfully defused bomb",
+      },
+      "some-repo",
+      123456,
+      1,
+      "team-project",
+    ],
+    Array [
+      Object {
+        "content": "✅ Successfully defused bomb",
+      },
+      "some-repo",
+      123456,
+      2,
+      "team-project",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Integration Test should add two landmines and catch them all 3`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Object {
+        "status": 2,
+      },
+      "some-repo",
+      123456,
+      1,
+      "team-project",
+    ],
+    Array [
+      Object {
+        "status": 2,
+      },
+      "some-repo",
+      123456,
+      2,
+      "team-project",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Integration Test should not find any landmines because there are no active threads 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      0,
+      "All bombs successfully defused",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Integration Test should not find any landmines because there are no active threads 2`] = `[MockFunction]`;
+
+exports[`Integration Test should not find any landmines because there are no active threads 3`] = `[MockFunction]`;
+
+exports[`Integration Test should not find any landmines because there are no threads 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      0,
+      "All bombs successfully defused",
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Integration Test should not find any landmines because there are no threads 2`] = `[MockFunction]`;
+
+exports[`Integration Test should not find any landmines because there are no threads 3`] = `[MockFunction]`;
