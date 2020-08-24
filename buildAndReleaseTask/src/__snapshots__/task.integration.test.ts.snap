@@ -39,27 +39,7 @@ exports[`Integration Test should add a landmine but not catch it 2`] = `
 }
 `;
 
-exports[`Integration Test should add a landmine but not catch it 3`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "status": 2,
-      },
-      "some-repo",
-      123456,
-      1,
-      "team-project",
-    ],
-  ],
-  "results": Array [
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
-  ],
-}
-`;
+exports[`Integration Test should add a landmine but not catch it 3`] = `[MockFunction]`;
 
 exports[`Integration Test should add a landmine but not catch it because the execution timed out 1`] = `
 [MockFunction] {
@@ -100,27 +80,7 @@ exports[`Integration Test should add a landmine but not catch it because the exe
 }
 `;
 
-exports[`Integration Test should add a landmine but not catch it because the execution timed out 3`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "status": 2,
-      },
-      "some-repo",
-      123456,
-      1,
-      "team-project",
-    ],
-  ],
-  "results": Array [
-    Object {
-      "type": "return",
-      "value": undefined,
-    },
-  ],
-}
-`;
+exports[`Integration Test should add a landmine but not catch it because the execution timed out 3`] = `[MockFunction]`;
 
 exports[`Integration Test should add two landmines and catch them all 1`] = `
 [MockFunction] {
