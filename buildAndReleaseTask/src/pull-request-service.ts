@@ -24,10 +24,14 @@ export default class PullRequestService {
             : [];
     }
 
-    public async addCommentToThread(repoName: string, pullRequestId: number, threadId: number, comment: string): Promise<void> {
+    public async addCommentToThread(repoName: string, pullRequestId: number, threadId: number, comment: string, autoResolve: boolean): Promise<void> {
         console.log(`Adding comment to thread (${threadId}): ${comment}...`);
 
         const gitApi = await this.connection.getGitApi();
         await gitApi.createComment({ content: comment }, repoName, pullRequestId, threadId, this.project);
+
+        if (autoResolve) {
+            await gitApi.updateThread({ status: CommentThreadStatus.Fixed }, repoName, pullRequestId, threadId, this.project);
+        }
     }
 }

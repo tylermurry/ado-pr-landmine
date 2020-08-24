@@ -26,6 +26,8 @@ export default async () => {
         const testCommand = tl.getInput('testCommand', true);
         const testCommandDirectory = tl.getInput('testCommandDirectory', false) || '.';
         const testCommandTimeout = parseInt(tl.getInput('testCommandTimeout', false) || '60000');
+        const autoResolveRaw = tl.getInput('autoResolve', false);
+        const autoResolve = autoResolveRaw ? `${autoResolveRaw}`.toUpperCase() === 'TRUE' : true;
 
         if (!accessToken) throw Error('accessToken must be provided');
         if (!orgURL) throw Error('orgUrl must be provided');
@@ -55,10 +57,10 @@ export default async () => {
             const bombDefused = await runMinesweeper(testCommand, testCommandDirectory, testCommandTimeout, thread);
 
             if (bombDefused) {
-                await pullRequestService.addCommentToThread(repo, pullRequestId, thread.id, '✅ Successfully defused bomb');
+                await pullRequestService.addCommentToThread(repo, pullRequestId, thread.id, '✅ Successfully defused bomb', autoResolve);
             } else {
                 atLeastOneFailure = true;
-                await pullRequestService.addCommentToThread(repo, pullRequestId, thread.id, '💥 Bomb not defused. Please adjust your test to catch the error');
+                await pullRequestService.addCommentToThread(repo, pullRequestId, thread.id, '💥 Bomb not defused. Please adjust your test to catch the error', autoResolve);
             }
         }
 

@@ -9,6 +9,7 @@ jest.mock('azure-pipelines-task-lib/task');
 const gitApiMock = {
     getThreads: jest.fn(),
     createComment: jest.fn(),
+    updateThread: jest.fn(),
 };
 (WebApi as any).mockImplementation(() => ({ getGitApi: () => gitApiMock }));
 
@@ -24,6 +25,7 @@ describe('Integration Test', () => {
         (tl.getInput as any).mockReturnValueOnce('npm test');
         (tl.getInput as any).mockReturnValueOnce('./src/__mock__');
         (tl.getInput as any).mockReturnValueOnce('5000');
+        (tl.getInput as any).mockReturnValueOnce(undefined);
         process.env.SYSTEM_TEAMPROJECT = 'team-project';
         process.env.BUILD_REPOSITORY_NAME = 'some-repo';
         process.env.SYSTEM_PULLREQUEST_PULLREQUESTID = '123456';
@@ -59,6 +61,7 @@ describe('Integration Test', () => {
 
         expect(tl.setResult).toMatchSnapshot();
         expect(gitApiMock.createComment).toMatchSnapshot();
+        expect(gitApiMock.updateThread).toMatchSnapshot();
     });
 
     it('should add a landmine but not catch it', async () => {
@@ -79,6 +82,7 @@ describe('Integration Test', () => {
 
         expect(tl.setResult).toMatchSnapshot();
         expect(gitApiMock.createComment).toMatchSnapshot();
+        expect(gitApiMock.updateThread).toMatchSnapshot();
     });
 
     it('should add a landmine but not catch it because the execution timed out', async () => {
@@ -99,6 +103,7 @@ describe('Integration Test', () => {
 
         expect(tl.setResult).toMatchSnapshot();
         expect(gitApiMock.createComment).toMatchSnapshot();
+        expect(gitApiMock.updateThread).toMatchSnapshot();
     });
 
     it('should not find any landmines because there are no threads', async () => {
@@ -108,6 +113,7 @@ describe('Integration Test', () => {
 
         expect(tl.setResult).toMatchSnapshot();
         expect(gitApiMock.createComment).toMatchSnapshot();
+        expect(gitApiMock.updateThread).toMatchSnapshot();
     });
 
     it('should not find any landmines because there are no active threads', async () => {
@@ -140,5 +146,6 @@ describe('Integration Test', () => {
 
         expect(tl.setResult).toMatchSnapshot();
         expect(gitApiMock.createComment).toMatchSnapshot();
+        expect(gitApiMock.updateThread).toMatchSnapshot();
     });
 });
