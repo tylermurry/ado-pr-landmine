@@ -3,40 +3,40 @@
   "id": "a0ef6bd7-c004-43b4-b694-a1c771d837f4",
   "name": "pr-landmine",
   "friendlyName": "PR Landmine",
-  "description": "An easy way to create manual mutation tests within an Azure DevOps pull request",
+  "description": "A simple, language agnostic solution for creating manual mutation tests directly in-line with an Azure DevOps pull request",
   "helpMarkDown": "",
   "category": "Utility",
-  "author": "Tyler Murry & Zach O'Hearn",
+  "author": "Tyler Murry",
   "version": {
-    "Major": 3,
+    "Major": 1,
     "Minor": 0,
-    "Patch": 10
+    "Patch": 0
   },
   "instanceNameFormat": "Sweeping for Landmines",
   "inputs": [
     {
       "name": "accessToken",
       "type": "string",
-      "label": "Personal Access Token to retrieve and update comments on the pull request",
+      "label": "The access token used to retrieve and update comments on the pull requests",
       "defaultValue": "$(System.AccessToken)",
       "required": true
     },
     {
       "name": "orgUrl",
       "type": "string",
-      "label": "URL of the azure devops organization (e.g. https://dev.azure.com/my-org)",
+      "label": "The full Azure DevOps url for your organization (e.g. https://dev.azure.com/my-organization)",
       "required": true
     },
     {
       "name": "testCommand",
       "type": "string",
-      "label": "Command that is run after each bomb is created. This command should be comprehensive enough to catch and defuse the bomb.",
+      "label": "The command that is executed after each landmine is added. Ideally, this includes other static validation such as linting.",
       "required": true
     },
     {
       "name": "testCommandDirectory",
       "type": "string",
-      "label": "The working directory where test command is executed.",
+      "label": "The directory to apply the test command. Useful if your tests are orchestrated in a different directory than root.",
       "required": false,
       "defaultValue": "$(System.DefaultWorkingDirectory)"
     },
@@ -46,6 +46,13 @@
       "label": "The number of milliseconds to wait before bailing on the test command. Needs to be sufficiently high to run the test suite but low enough to catch infinite loops or runaway threads created by the mutation.",
       "required": false,
       "defaultValue": "60000"
+    },
+    {
+      "name": "autoResolve",
+      "type": "boolean",
+      "label": "If the bomb is defused successfully, the original pull request comment will be auto-resolved.",
+      "required": false,
+      "defaultValue": true
     }
   ],
   "execution": {

@@ -2,14 +2,14 @@
   "manifestVersion": 1,
   "id": "pr-landmine",
   "name": "PR Landmine",
-  "version": "3.0.10",
+  "version": "1.0.0",
   "publisher": "tylermurry",
   "targets": [
     {
       "id": "Microsoft.VisualStudio.Services"
     }
   ],
-  "description": "An easy way to create manual mutation tests within an Azure DevOps pull request",
+  "description": "A simple, language agnostic solution for creating manual mutation tests directly in-line with an Azure DevOps pull request",
   "categories": [
     "Azure Pipelines"
   ],

@@ -1,6 +1,4 @@
-![pr-landmine-logo](images/extension-icon.png)
-
-# PR Landmine for Azure DevOps
+# 💣 PR Landmine for Azure DevOps
 A simple, language agnostic solution for creating manual mutation tests directly in-line with an Azure DevOps pull request
 
 #### Why would I use this?
@@ -21,7 +19,7 @@ A simple, language agnostic solution for creating manual mutation tests directly
 
     ```yml
     steps:
-    - task: pr-landmine@3
+    - task: pr-landmine@1
       inputs:
         orgUrl: 'https://dev.azure.com/my-organization'
         testCommand: 'npm test'
