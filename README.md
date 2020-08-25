@@ -13,27 +13,33 @@ A simple, language agnostic solution for creating manual mutation tests directly
 * The solution isn't recommended for applications that have lots of unit tests and good mutation coverage.
  
 # How it works
--- GIF GOES HERE --
+![How-It-Works](images/how-it-works.gif)
 
-# Use it in Your Organization
-1. Install the `PR Landmine` extension in your organization. (TODO: link to instructions)
-2. Add the task into your pull request build:
+# Install the Task for Your Organization
+1. Install the `PR Landmine` extension in your organization. [More information here.](https://docs.microsoft.com/en-us/azure/devops/marketplace/install-extension?view=azure-devops&tabs=browser)
+1. Add the task into your pull request build:
 
-    ```
+    ```yml
     steps:
     - task: pr-landmine@3
       inputs:
         orgUrl: 'https://dev.azure.com/my-organization'
         testCommand: 'npm test'
     ```
-    If you are using the `System.AccessToken`, be sure to set `persistCredentials` to `true` if it's not already:
-    ```
+    If you are using the `System.AccessToken` (default), be sure to set `persistCredentials` to `true` if it's not already:
+    ```yml
     steps:
     - checkout: self
       persistCredentials: true
     ```  
-3. Grant the build job access to update pull requests
-4. Now you're Ready to lay down some mines! 💣 
+1. Grant the build job user the `Contribute to pull requests` permission to allow it to add pull request comments. [More information here.](https://docs.microsoft.com/en-us/azure/devops/organizations/security/set-git-tfvc-repository-permissions?view=azure-devops#set-git-repository-permissions)
+1. Now you're Ready to lay down some mines! 💣
+
+# Add a Landmine to a Pull Request
+1. In a pull request, choose a file and select the range of code where you would like to create a landmine.
+1. Start the comment with either the bomb emoji 💣 or `/bomb`. Either of these will signal to the task that the comment is a landmine.
+1. On the next line, use the [code suggestion syntax](https://devblogs.microsoft.com/devops/introducing-the-new-pull-request-experience-for-azure-repos/#add-suggested-changes-and-commit-within-a-pull-request) to inject mutated code.
+1. Re-run the pull request job and the landmine comment should be annotated with the success or failure of the bomb defusal.
 
 # Task Options
 | Property               | Required | Default Value           | Description                                                                                                                                                                                                   |
