@@ -22,7 +22,6 @@ const outInvalidThreads = (thread: GitPullRequestCommentThread): boolean => {
 export default async () => {
     try {
         const accessToken = tl.getInput('accessToken', true);
-        const orgURL = tl.getInput('orgUrl', true);
         const testCommand = tl.getInput('testCommand', true);
         const testCommandDirectory = tl.getInput('testCommandDirectory', false) || '.';
         const testCommandTimeout = parseInt(tl.getInput('testCommandTimeout', false) || '60000');
@@ -30,15 +29,16 @@ export default async () => {
         const autoResolve = autoResolveRaw ? `${autoResolveRaw}`.toUpperCase() === 'TRUE' : true;
 
         if (!accessToken) throw Error('accessToken must be provided');
-        if (!orgURL) throw Error('orgUrl must be provided');
         if (!testCommand) throw Error('testCommand must be provided');
         if (!process.env.SYSTEM_TEAMPROJECT) throw Error('System.TeamProject must be provided');
         if (!process.env.BUILD_REPOSITORY_NAME) throw Error('Build.Repository.Name must be provided');
         if (!process.env.SYSTEM_PULLREQUEST_PULLREQUESTID) throw Error('System.PullRequest.PullRequestId must be provided');
+        if (!process.env.SYSTEM_TEAMFOUNDATIONCOLLECTIONURI) throw Error('System.TeamFoundationCollectionUri must be provided');
 
         const project = process.env.SYSTEM_TEAMPROJECT;
         const repo = process.env.BUILD_REPOSITORY_NAME;
         const pullRequestId = parseInt(process.env.SYSTEM_PULLREQUEST_PULLREQUESTID);
+        const orgURL = process.env.SYSTEM_TEAMFOUNDATIONCOLLECTIONURI;
 
         const pullRequestService = new PullRequestService(accessToken, project, orgURL);
 

@@ -10,7 +10,7 @@
   "version": {
     "Major": 1,
     "Minor": 0,
-    "Patch": 0
+    "Patch": 2
   },
   "instanceNameFormat": "Sweeping for Landmines",
   "inputs": [
@@ -19,12 +19,6 @@
       "type": "string",
       "label": "The access token used to retrieve and update comments on the pull requests",
       "defaultValue": "$(System.AccessToken)",
-      "required": true
-    },
-    {
-      "name": "orgUrl",
-      "type": "string",
-      "label": "The full Azure DevOps url for your organization (e.g. https://dev.azure.com/my-organization)",
       "required": true
     },
     {

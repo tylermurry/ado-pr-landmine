@@ -21,7 +21,6 @@ A simple, language agnostic solution for creating manual mutation tests directly
     steps:
     - task: pr-landmine@1
       inputs:
-        orgUrl: 'https://dev.azure.com/my-organization'
         testCommand: 'npm test'
     ```
     If you are using the `System.AccessToken` (default), be sure to set `persistCredentials` to `true` if it's not already:
@@ -40,14 +39,13 @@ A simple, language agnostic solution for creating manual mutation tests directly
 1. Re-run the pull request job and the landmine comment should be annotated with the success or failure of the bomb defusal.
 
 # Task Options
-| Property               | Required | Default Value           | Description                                                                                                                                                                                                   |
-| -----------------------|----------|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `accessToken`          | Yes      | `$(System.AccessToken)` | The access token used to retrieve and update comments on the pull requests                                                                                                                                    |
-| `orgUrl`               | Yes      |                         | The full Azure DevOps url for your organization (e.g. https://dev.azure.com/my-organization)                                                                                                                  |
-| `testCommand`          | Yes      |                         | The command that is executed after each landmine is added. Ideally, this includes other static validation such as linting.                                                                                    |
-| `testCommandDirectory` | No       | `.`                     | The directory to apply the test command. Useful if your tests are orchestrated in a different directory than root.                                                                                            |
-| `testCommandTimeout`   | No       | `60000`                 | The number of milliseconds to wait before bailing on the test command. Needs to be sufficiently high to run the test suite but low enough to catch infinite loops or runaway threads created by the mutation. |
-| `autoResolve`          | No       | `true`                  | If the bomb is defused successfully, the original pull request comment will be auto-resolved.                                                                                                                 |
+| Property               | Required | Default Value                       | Description                                                                                                                                                                                                   |
+| -----------------------|----------|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `accessToken`          | Yes      | `$(System.AccessToken)`             | The access token used to retrieve and update comments on the pull requests                                                                                                                                    |
+| `testCommand`          | Yes      |                                     | The command that is executed after each landmine is added. Ideally, this includes other static validation such as linting.                                                                                    |
+| `testCommandDirectory` | No       | `$(System.DefaultWorkingDirectory)` | The directory to apply the test command. Useful if your tests are orchestrated in a different directory than root.                                                                                            |
+| `testCommandTimeout`   | No       | `60000`                             | The number of milliseconds to wait before bailing on the test command. Needs to be sufficiently high to run the test suite but low enough to catch infinite loops or runaway threads created by the mutation. |
+| `autoResolve`          | No       | `true`                              | If the bomb is defused successfully, the original pull request comment will be auto-resolved.                                                                                                                 |
 
 # Contribution
 Found an issue or see something cool that's missing? Pull requests and issues are warmly accepted!   

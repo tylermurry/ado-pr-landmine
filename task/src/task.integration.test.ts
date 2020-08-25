@@ -21,7 +21,6 @@ describe('Integration Test', () => {
 
         // Mock Inputs
         (tl.getInput as any).mockReturnValueOnce('some-token');
-        (tl.getInput as any).mockReturnValueOnce('some-org-url');
         (tl.getInput as any).mockReturnValueOnce('npm test');
         (tl.getInput as any).mockReturnValueOnce('./src/__mock__');
         (tl.getInput as any).mockReturnValueOnce('5000');
@@ -29,6 +28,7 @@ describe('Integration Test', () => {
         process.env.SYSTEM_TEAMPROJECT = 'team-project';
         process.env.BUILD_REPOSITORY_NAME = 'some-repo';
         process.env.SYSTEM_PULLREQUEST_PULLREQUESTID = '123456';
+        process.env.SYSTEM_TEAMFOUNDATIONCOLLECTIONURI = 'some-org-url';
     })
 
     it('should add two landmines and catch them all', async () => {
