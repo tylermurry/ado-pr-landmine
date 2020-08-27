@@ -5,7 +5,7 @@ exports[`Integration Test should add a landmine but not catch it 1`] = `
   "calls": Array [
     Array [
       2,
-      "There was at least bomb that was not defused.",
+      "There was at least one bomb that was not defused.",
     ],
   ],
   "results": Array [
@@ -73,7 +73,7 @@ exports[`Integration Test should add a landmine but not catch it because the exe
   "calls": Array [
     Array [
       2,
-      "There was at least bomb that was not defused.",
+      "There was at least one bomb that was not defused.",
     ],
   ],
   "results": Array [
