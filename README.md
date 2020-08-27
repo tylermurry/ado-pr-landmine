@@ -1,9 +1,17 @@
-# 💣 PR Landmine for Azure DevOps
+# 💣 PR Landmines for Azure DevOps
 A simple, language agnostic solution for creating manual mutation tests directly in-line with an Azure DevOps pull request
 
+# Overview
+Using GitHub? See [github-pr-landmine](https://github.com/tylermurry/github-pr-landmine)
+
+As a reviewer, it's important you feel comfortable with the quality of the code in a PR.
+Mutation testing is a powerful way to gain confidence in the quality of the tests, but it can be difficult, time-consuming or even inappropriate to seek high-levels mutation coverage in some cases.
+
+PR Landmines allow reviewers to strategically add mutations to the code of a PR and verify the tests will catch the issue. All while using the existing Azure DevOps pull request interface to keep things in-line and straight-forward. 
+
 #### Why would I use this?
-* Great for applications that have little-to-no mutation coverage
 * Takes seconds to implement and is language agnostic
+* Great for applications that have little-to-no mutation coverage
 * Perfect for applications that get their coverage from slower-running integration tests rather than unit tests
 * A powerful conversation starter to educate others on the benefits of testing in real-time
 
