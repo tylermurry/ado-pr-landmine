@@ -17,6 +17,8 @@ const extractCodeBlock = (fileContents: string, beginLine: number, beginOffset: 
             codeBlock = `${codeBlock}${lines[lineNumber]}\n`;
         }
     }
+    
+    console.log('Adding some logging!');
 
     return codeBlock;
 }
