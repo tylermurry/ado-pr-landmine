@@ -20,7 +20,7 @@ const outInvalidThreads = (thread: GitPullRequestCommentThread): boolean => {
     return true;
 };
 
-const formatBombReportLine = (bombResult: any): string[] => {
+const extractBombResults = (bombResult: any): string[] => {
     const pathParts = bombResult.filePath.split("/");
     const fileName = pathParts[pathParts.length - 1];
 
@@ -87,13 +87,13 @@ export default async () => {
                 ['File Name', 'Line Number', 'Bomb Defused']
             ];
             for (const bombResult of bombReport) {
-                reportData.push(formatBombReportLine(bombResult));
+                reportData.push(extractBombResults(bombResult));
             }
             console.log(table(reportData));
         }
 
         if (atLeastOneFailure) {
-            throw Error('There was at least bomb that was not defused.')
+            throw Error('There was at least one bomb that was not defused.')
         }
 
         tl.setResult(tl.TaskResult.Succeeded, 'All bombs successfully defused');
