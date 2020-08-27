@@ -21,6 +21,33 @@ exports[`Integration Test should add a landmine but not catch it 2`] = `
 [MockFunction] {
   "calls": Array [
     Array [
+      Array [
+        Array [
+          "File Name",
+          "Line Number",
+          "Bomb Defused",
+        ],
+        Array [
+          "insertion-sort.js",
+          2,
+          "no",
+        ],
+      ],
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Integration Test should add a landmine but not catch it 3`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
       Object {
         "content": "💥 Bomb not defused. Please adjust your test to catch the error",
       },
@@ -39,7 +66,7 @@ exports[`Integration Test should add a landmine but not catch it 2`] = `
 }
 `;
 
-exports[`Integration Test should add a landmine but not catch it 3`] = `[MockFunction]`;
+exports[`Integration Test should add a landmine but not catch it 4`] = `[MockFunction]`;
 
 exports[`Integration Test should add a landmine but not catch it because the execution timed out 1`] = `
 [MockFunction] {
@@ -62,6 +89,33 @@ exports[`Integration Test should add a landmine but not catch it because the exe
 [MockFunction] {
   "calls": Array [
     Array [
+      Array [
+        Array [
+          "File Name",
+          "Line Number",
+          "Bomb Defused",
+        ],
+        Array [
+          "insertion-sort.js",
+          "7-8",
+          "no",
+        ],
+      ],
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Integration Test should add a landmine but not catch it because the execution timed out 3`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
       Object {
         "content": "💥 Bomb not defused. Please adjust your test to catch the error",
       },
@@ -80,7 +134,7 @@ exports[`Integration Test should add a landmine but not catch it because the exe
 }
 `;
 
-exports[`Integration Test should add a landmine but not catch it because the execution timed out 3`] = `[MockFunction]`;
+exports[`Integration Test should add a landmine but not catch it because the execution timed out 4`] = `[MockFunction]`;
 
 exports[`Integration Test should add two landmines and catch them all 1`] = `
 [MockFunction] {
@@ -100,6 +154,38 @@ exports[`Integration Test should add two landmines and catch them all 1`] = `
 `;
 
 exports[`Integration Test should add two landmines and catch them all 2`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      Array [
+        Array [
+          "File Name",
+          "Line Number",
+          "Bomb Defused",
+        ],
+        Array [
+          "insertion-sort.js",
+          3,
+          "yes",
+        ],
+        Array [
+          "insertion-sort.js",
+          3,
+          "yes",
+        ],
+      ],
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
+
+exports[`Integration Test should add two landmines and catch them all 3`] = `
 [MockFunction] {
   "calls": Array [
     Array [
@@ -134,7 +220,7 @@ exports[`Integration Test should add two landmines and catch them all 2`] = `
 }
 `;
 
-exports[`Integration Test should add two landmines and catch them all 3`] = `
+exports[`Integration Test should add two landmines and catch them all 4`] = `
 [MockFunction] {
   "calls": Array [
     Array [
@@ -190,6 +276,8 @@ exports[`Integration Test should not find any landmines because there are no act
 
 exports[`Integration Test should not find any landmines because there are no active threads 3`] = `[MockFunction]`;
 
+exports[`Integration Test should not find any landmines because there are no active threads 4`] = `[MockFunction]`;
+
 exports[`Integration Test should not find any landmines because there are no threads 1`] = `
 [MockFunction] {
   "calls": Array [
@@ -210,3 +298,5 @@ exports[`Integration Test should not find any landmines because there are no thr
 exports[`Integration Test should not find any landmines because there are no threads 2`] = `[MockFunction]`;
 
 exports[`Integration Test should not find any landmines because there are no threads 3`] = `[MockFunction]`;
+
+exports[`Integration Test should not find any landmines because there are no threads 4`] = `[MockFunction]`;

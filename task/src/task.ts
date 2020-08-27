@@ -26,7 +26,7 @@ const formatBombReportLine = (bombResult: any): string[] => {
 
     const lineNumbers = bombResult.lineNumberStart === bombResult.lineNumberEnd ? bombResult.lineNumberStart : bombResult.lineNumberStart + '-' + bombResult.lineNumberEnd;
 
-    return [fileName, lineNumbers, bombResult.bombDefused];
+    return [fileName, lineNumbers, bombResult.bombDefused ? 'yes' : 'no'];
 };
 
 export default async () => {
@@ -82,13 +82,15 @@ export default async () => {
             }
         }
 
-        const reportData = [
-            ['File Name', 'Line Number', 'Bomb Defused']
-        ];
-        for (const bombResult of bombReport) {
-            reportData.push(formatBombReportLine(bombResult));
+        if (bombReport.length > 0) {
+            const reportData = [
+                ['File Name', 'Line Number', 'Bomb Defused']
+            ];
+            for (const bombResult of bombReport) {
+                reportData.push(formatBombReportLine(bombResult));
+            }
+            console.log(table(reportData));
         }
-        console.log(table(reportData));
 
         if (atLeastOneFailure) {
             throw Error('There was at least bomb that was not defused.')

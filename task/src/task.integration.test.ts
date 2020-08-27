@@ -1,10 +1,12 @@
 import tl = require('azure-pipelines-task-lib/task');
 import { WebApi } from 'azure-devops-node-api';
 import {CommentThreadStatus} from "azure-devops-node-api/interfaces/GitInterfaces";
+import { table } from 'table';
 import executeTask from './task';
 
 jest.mock('azure-devops-node-api');
 jest.mock('azure-pipelines-task-lib/task');
+jest.mock('table');
 
 const gitApiMock = {
     getThreads: jest.fn(),
@@ -60,6 +62,7 @@ describe('Integration Test', () => {
         await executeTask();
 
         expect(tl.setResult).toMatchSnapshot();
+        expect(table).toMatchSnapshot();
         expect(gitApiMock.createComment).toMatchSnapshot();
         expect(gitApiMock.updateThread).toMatchSnapshot();
     });
@@ -81,6 +84,7 @@ describe('Integration Test', () => {
         await executeTask();
 
         expect(tl.setResult).toMatchSnapshot();
+        expect(table).toMatchSnapshot();
         expect(gitApiMock.createComment).toMatchSnapshot();
         expect(gitApiMock.updateThread).toMatchSnapshot();
     });
@@ -102,6 +106,7 @@ describe('Integration Test', () => {
         await executeTask();
 
         expect(tl.setResult).toMatchSnapshot();
+        expect(table).toMatchSnapshot();
         expect(gitApiMock.createComment).toMatchSnapshot();
         expect(gitApiMock.updateThread).toMatchSnapshot();
     });
@@ -112,6 +117,7 @@ describe('Integration Test', () => {
         await executeTask();
 
         expect(tl.setResult).toMatchSnapshot();
+        expect(table).toMatchSnapshot();
         expect(gitApiMock.createComment).toMatchSnapshot();
         expect(gitApiMock.updateThread).toMatchSnapshot();
     });
@@ -145,6 +151,7 @@ describe('Integration Test', () => {
         await executeTask();
 
         expect(tl.setResult).toMatchSnapshot();
+        expect(table).toMatchSnapshot();
         expect(gitApiMock.createComment).toMatchSnapshot();
         expect(gitApiMock.updateThread).toMatchSnapshot();
     });
