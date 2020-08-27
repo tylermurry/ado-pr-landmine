@@ -1,6 +1,6 @@
 const insertionSort = (inputArr) => {
     let length = inputArr.length;
-    for (let i = 3; i < length; i++) {
+    for (let i = 1; i < length; i++) {
         let key = inputArr[i];
         let j = i - 1;
         while (j >= 0 && inputArr[j] > key) {
