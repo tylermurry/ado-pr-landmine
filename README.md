@@ -4,8 +4,8 @@ A simple, language agnostic solution for creating manual mutation tests directly
 # Overview
 Using GitHub? See [github-pr-landmine](https://github.com/tylermurry/github-pr-landmine)
 
-As a reviewer, it's important you feel comfortable with the quality of the code in a PR.
-Mutation testing is a powerful way to gain confidence in the quality of the tests, but it can be difficult, time-consuming or even inappropriate to seek high-levels mutation coverage in some cases.
+As a reviewer, it's important you feel comfortable with the code quality in a PR.
+Mutation testing is a powerful way to gain confidence in the tests, but it can be difficult, time-consuming or even inappropriate to seek high-levels mutation coverage in some cases.
 
 PR Landmines allow reviewers to strategically add mutations to the code of a PR and verify the tests will catch the issue. All while using the existing Azure DevOps pull request interface to keep things in-line and straight-forward. 
 
