@@ -1,6 +1,7 @@
 import tl = require('azure-pipelines-task-lib/task');
 import PullRequestService from './pull-request-service';
 import {GitPullRequestCommentThread} from "azure-devops-node-api/interfaces/GitInterfaces";
+import { table } from 'table';
 import runMinesweeper from './run-minesweeper';
 
 const outInvalidThreads = (thread: GitPullRequestCommentThread): boolean => {
@@ -17,7 +18,16 @@ const outInvalidThreads = (thread: GitPullRequestCommentThread): boolean => {
     if (thread.comments.find(comment => !comment.isDeleted && comment.content?.includes('✅'))) return false;
 
     return true;
-}
+};
+
+const extractBombResults = (bombResult: any): string[] => {
+    const pathParts = bombResult.filePath.split("/");
+    const fileName = pathParts[pathParts.length - 1];
+
+    const lineNumbers = bombResult.lineNumberStart === bombResult.lineNumberEnd ? bombResult.lineNumberStart : bombResult.lineNumberStart + '-' + bombResult.lineNumberEnd;
+
+    return [fileName, lineNumbers, bombResult.bombDefused ? 'yes' : 'no'];
+};
 
 export default async () => {
     try {
@@ -48,6 +58,7 @@ export default async () => {
         const validThreads = threads.filter(outInvalidThreads);
         tl.debug(`Valid threads: ${JSON.stringify(validThreads, null, 2)}`);
 
+        const bombReport = [];
         let atLeastOneFailure = false;
 
         for (const thread of validThreads) {
@@ -55,6 +66,13 @@ export default async () => {
             if (!thread.id) throw Error('Invalid thread id');
 
             const bombDefused = await runMinesweeper(testCommand, testCommandDirectory, testCommandTimeout, thread);
+
+            bombReport.push({
+                filePath: thread?.threadContext?.filePath,
+                lineNumberStart: thread?.threadContext?.rightFileStart?.line,
+                lineNumberEnd: thread?.threadContext?.rightFileEnd?.line,
+                bombDefused
+            });
 
             if (bombDefused) {
                 await pullRequestService.addCommentToThread(repo, pullRequestId, thread.id, '✅ Successfully defused bomb', autoResolve);
@@ -64,8 +82,18 @@ export default async () => {
             }
         }
 
+        if (bombReport.length > 0) {
+            const reportData = [
+                ['File Name', 'Line Number', 'Bomb Defused']
+            ];
+            for (const bombResult of bombReport) {
+                reportData.push(extractBombResults(bombResult));
+            }
+            console.log(table(reportData));
+        }
+
         if (atLeastOneFailure) {
-            throw Error('There was at least bomb that was not defused.')
+            throw Error('There was at least one bomb that was not defused.')
         }
 
         tl.setResult(tl.TaskResult.Succeeded, 'All bombs successfully defused');
