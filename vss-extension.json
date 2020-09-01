@@ -2,8 +2,9 @@
   "manifestVersion": 1,
   "id": "pr-landmine",
   "name": "PR Landmine",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "publisher": "tylermurry",
+  "public": true,
   "targets": [
     {
       "id": "Microsoft.VisualStudio.Services"
