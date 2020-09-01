@@ -17,6 +17,11 @@
   "icons": {
     "default": "images/extension-icon.png"
   },
+  "content": {
+    "details": {
+      "path": "README.md"
+    }
+  },
   "files": [
     {
       "path": "task"
