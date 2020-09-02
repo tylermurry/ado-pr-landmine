@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "pr-landmine",
   "name": "PR Landmine",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "publisher": "tylermurry",
   "public": true,
   "targets": [
@@ -22,12 +22,11 @@
       "path": "README.md"
     }
   },
-  "screenshots": [
-    { "path": "images/how-it-works.gif" }
-  ],
   "files": [
+    { "path": "task" },
     {
-      "path": "task"
+      "path": "images",
+      "addressable": true
     }
   ],
   "contributions": [

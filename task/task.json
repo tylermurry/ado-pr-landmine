@@ -10,7 +10,7 @@
   "version": {
     "Major": 1,
     "Minor": 0,
-    "Patch": 5
+    "Patch": 7
   },
   "instanceNameFormat": "Sweeping for Landmines",
   "inputs": [
@@ -51,7 +51,7 @@
   ],
   "execution": {
     "Node10": {
-      "target": "index.js"
+      "target": "dist/index.js"
     }
   }
 }

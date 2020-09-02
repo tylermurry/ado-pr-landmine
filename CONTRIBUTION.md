@@ -1,8 +1,6 @@
 # Building the extension
-1. Remove the `task/src/__mock__/node_modules` folder if it exists. Otherwise, it will be bundled into the task and exceed the 50mb limit
-2. From the `task/` folder, run `tsc`
 3. Update the `version` property within `task/task.json` and `vss-extension.json`
-4. From the root folder, run `tfx extension create --manifest-globs vss-extension.json` 
+4. From the `tast/` folder, run `npm run package-extension` 
 5. This will create a `.vsix` file in the root directory. This is the extension file to upload.
 
 # Upload and publish extension
