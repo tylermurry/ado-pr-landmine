@@ -2,8 +2,9 @@
   "manifestVersion": 1,
   "id": "pr-landmine",
   "name": "PR Landmine",
-  "version": "1.0.2",
+  "version": "1.0.7",
   "publisher": "tylermurry",
+  "public": true,
   "targets": [
     {
       "id": "Microsoft.VisualStudio.Services"
@@ -16,9 +17,16 @@
   "icons": {
     "default": "images/extension-icon.png"
   },
+  "content": {
+    "details": {
+      "path": "README.md"
+    }
+  },
   "files": [
+    { "path": "task" },
     {
-      "path": "task"
+      "path": "images",
+      "addressable": true
     }
   ],
   "contributions": [
