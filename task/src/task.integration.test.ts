@@ -117,7 +117,7 @@ describe('Integration Test', () => {
         await executeTask();
 
         expect(tl.setResult).toMatchSnapshot();
-        expect(table).toMatchSnapshot();
+        expect(table).not.toHaveBeenCalled();
         expect(gitApiMock.createComment).toMatchSnapshot();
         expect(gitApiMock.updateThread).toMatchSnapshot();
     });
@@ -151,7 +151,7 @@ describe('Integration Test', () => {
         await executeTask();
 
         expect(tl.setResult).toMatchSnapshot();
-        expect(table).toMatchSnapshot();
+        expect(table).not.toHaveBeenCalled();
         expect(gitApiMock.createComment).toMatchSnapshot();
         expect(gitApiMock.updateThread).toMatchSnapshot();
     });

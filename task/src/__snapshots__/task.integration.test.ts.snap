@@ -24,7 +24,7 @@ exports[`Integration Test should add a landmine but not catch it 2`] = `
       Array [
         Array [
           "File Name",
-          "Line Number",
+          "Line Numbers",
           "Bomb Defused",
         ],
         Array [
@@ -92,7 +92,7 @@ exports[`Integration Test should add a landmine but not catch it because the exe
       Array [
         Array [
           "File Name",
-          "Line Number",
+          "Line Numbers",
           "Bomb Defused",
         ],
         Array [
@@ -160,7 +160,7 @@ exports[`Integration Test should add two landmines and catch them all 2`] = `
       Array [
         Array [
           "File Name",
-          "Line Number",
+          "Line Numbers",
           "Bomb Defused",
         ],
         Array [
@@ -276,8 +276,6 @@ exports[`Integration Test should not find any landmines because there are no act
 
 exports[`Integration Test should not find any landmines because there are no active threads 3`] = `[MockFunction]`;
 
-exports[`Integration Test should not find any landmines because there are no active threads 4`] = `[MockFunction]`;
-
 exports[`Integration Test should not find any landmines because there are no threads 1`] = `
 [MockFunction] {
   "calls": Array [
@@ -298,5 +296,3 @@ exports[`Integration Test should not find any landmines because there are no thr
 exports[`Integration Test should not find any landmines because there are no threads 2`] = `[MockFunction]`;
 
 exports[`Integration Test should not find any landmines because there are no threads 3`] = `[MockFunction]`;
-
-exports[`Integration Test should not find any landmines because there are no threads 4`] = `[MockFunction]`;
